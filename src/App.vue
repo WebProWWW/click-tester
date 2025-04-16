@@ -46,6 +46,10 @@ function isMarker(dotMarker: number): boolean {
     return dotMarker === Number(marker.value)
 }
 
+function onMarkerClick(markerVal: number): void {
+    marker.value = markerVal
+}
+
 function interval(): void {
     const now = new Date()
     const ms = now.getMilliseconds()
@@ -64,30 +68,15 @@ onMounted(() => {
 <template>
 <div style="max-width: 300px; margin: auto; padding: 15px 0;">
 
-    <div class="mb-4">
-        <select class="form-select" v-model="marker">
-            <option disabled>Метка</option>
-            <option value="0">000</option>
-            <option value="125">125</option>
-            <option value="250">250</option>
-            <option value="375">375</option>
-            <option value="500">500</option>
-            <option value="625">625</option>
-            <option value="750">750</option>
-            <option value="875">875</option>
-        </select>
-    </div>
-
-
     <div class="clock">
-        <div class="clock-dot" :class="{ active: isMarker(0) }"></div>
-        <div class="clock-dot" :class="{ active: isMarker(250) }"></div>
-        <div class="clock-dot" :class="{ active: isMarker(500) }"></div>
-        <div class="clock-dot" :class="{ active: isMarker(750) }"></div>
-        <div class="clock-dot" :class="{ active: isMarker(125) }"></div>
-        <div class="clock-dot" :class="{ active: isMarker(375) }"></div>
-        <div class="clock-dot" :class="{ active: isMarker(625) }"></div>
-        <div class="clock-dot" :class="{ active: isMarker(875) }"></div>
+        <div class="clock-dot" :class="{ active: isMarker(0) }" @click="onMarkerClick(0)"></div>
+        <div class="clock-dot" :class="{ active: isMarker(250) }" @click="onMarkerClick(250)"></div>
+        <div class="clock-dot" :class="{ active: isMarker(500) }" @click="onMarkerClick(500)"></div>
+        <div class="clock-dot" :class="{ active: isMarker(750) }" @click="onMarkerClick(750)"></div>
+        <div class="clock-dot" :class="{ active: isMarker(125) }" @click="onMarkerClick(125)"></div>
+        <div class="clock-dot" :class="{ active: isMarker(375) }" @click="onMarkerClick(375)"></div>
+        <div class="clock-dot" :class="{ active: isMarker(625) }" @click="onMarkerClick(625)"></div>
+        <div class="clock-dot" :class="{ active: isMarker(875) }" @click="onMarkerClick(875)"></div>
         <div class="clock-ms-arr" :style="{ transform: `rotate(${rotate}deg)` }"></div>
         <div class="clock-time">
             <div class="clock-time-s">{{ String(sms.h).padStart(2, '0') }}</div>
@@ -122,7 +111,6 @@ onMounted(() => {
                 <div class="col">
                     {{ click.n }}
                 </div>
-
                 <div class="col-2 text-center">
                     {{ String(click.h).padStart(2, '0') }}
                 </div>

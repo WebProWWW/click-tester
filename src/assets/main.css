@@ -14,6 +14,8 @@
     margin: -10px;
     background-color: #000;
     border-radius: 50%;
+    user-select: none;
+    cursor: pointer;
 }
 
 .clock-dot.active {
@@ -71,6 +73,18 @@
     left: 15%;
 }
 
+.clock-dot::after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    margin: -15px 0 0 -15px;
+    background-color: red;
+    opacity: 0;
+    z-index: 100;
+}
+
 .clock-dot:nth-child(1)::before {
     content: '000';
     top: 25px;
@@ -123,14 +137,22 @@
     display: flex;
     position: absolute;
     align-items: center;
+    justify-content: center;
     bottom: -50px;
-    left: 50%;
-    margin-left: -108px;
+    width: 100%;
+    /* left: 50%; */
+    /* margin-left: -108px; */
     line-height: 1;
     font-size: 25px;
     font-weight: 600;
     text-align: center;
     /* border: 1px solid red; */
+}
+
+.clock-time-label {
+    padding-top: 3px;
+    font-weight: 200;
+    font-size: 23px;
 }
 
 .clock-time-s {
@@ -139,8 +161,9 @@
 }
 
 .clock-time-d {
+    padding-bottom: 3px;
     /* border: 1px solid red; */
-    margin-bottom: 3px;
+    /* margin-bottom: 3px; */
 }
 
 .clock-time-ms {
@@ -167,4 +190,17 @@
     margin: -150px 0 0 0;
     border-radius: 5px;
     background-color: #000;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.rotating {
+    animation: spin 1s linear infinite;
 }
